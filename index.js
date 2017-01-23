@@ -3,6 +3,6 @@
  */
 
 module.exports = {
-    Ticker: require('./dist/ticker.js'),
-    Manager: require('./dist/manager.js')
+    Timer: require('./dist/timer.js'),
+    manager: require('./dist/manager.js')
 };
