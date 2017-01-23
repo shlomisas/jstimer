@@ -2,6 +2,7 @@
   "name": "jstimer",
   "version": "1.0.11",
   "description": "JavaScript timer manager",
+    "keywords": ["javascript", "timer", "setInterval", "setTimeout", "clearInterval", "clearTimeout"],
   "main": "index.js",
   "repository": "https://github.com/shlomisas/jstimer",
   "author": "Shlomi Sasson <shlomi@sasson.me>",
