@@ -1,9 +1,9 @@
 {
-    "name": "timger",
+    "name": "jstimer",
     "version": "1.0.0",
     "description": "JavaScript timer manager",
     "main": "index.js",
-    "repository": "https://github.com/shlomisas/timger",
+    "repository": "https://github.com/shlomisas/jstimer",
     "author": "Shlomi Sasson <shlomi@sasson.me>",
     "license": "MIT",
     "scripts": {

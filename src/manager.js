@@ -5,42 +5,33 @@
 class Manager{
 
     _interval = 10;
-    _timer;
-    _tickers = [];
+    _nativeTimer;
+    _timers = [];
 
-    setInterval(interval){
-        this._interval = interval;
-    }
+    constructor(){
+        this._nativeTimer = setInterval(() => {
+            for(let i=0; i<this._timers.length; i++){
 
-    start(){
-
-        this.stop();
-
-        this._timer = setInterval(() => {
-            for(let i=0;i<this._tickers.length;i++){
-
-                let ticker = this._tickers[i];
+                let ticker = this._timers[i];
 
                 ticker.tick(this._interval);
 
                 if(ticker.finished()){
-                    this._tickers.splice(i, 1);
+                    this._timers.splice(i, 1);
                     ticker.done();
                 }
             }
         }, this._interval);
     }
 
-    stop(){
-        if(this._timer){
-            clearInterval(this._timer);
-            this._timer = null;
-        }
-    }
-
     dispose(){
-        this.stop();
-        this._tickers = [];
+
+        if(this._nativeTimer){
+            clearInterval(this._nativeTimer);
+            this._nativeTimer = null;
+        }
+
+        this._timers = [];
     }
 
     /**
@@ -48,11 +39,17 @@ class Manager{
      * @param ticker TimerTicker
      */
     add(ticker){
-        return this._tickers.push(ticker) - 1;
+        return this._timers.push(ticker) - 1;
     }
 
-    remove(tickerId){
-        this._tickers.splice(tickerId, 1);
+    remove(tickerId, event){
+        let ticker = this._timers[tickerId];
+
+        if(ticker){
+            ticker.done(event);
+        }
+
+        this._timers.splice(tickerId, 1);
     }
 }
 

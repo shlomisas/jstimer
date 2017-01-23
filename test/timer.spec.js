@@ -6,20 +6,18 @@ import chai from 'chai';
 import sinon from 'sinon';
 
 import manager from '../src/manager';
-import Ticker from '../src/ticker';
+import Timer from '../src/timer';
 
 const assert = chai.assert;
 
 describe('Manager', () => {
 
-    it('should register one time ticker', done => {
+    it('should open one time timer', done => {
         try {
 
             let maxLoops = 1;
             let interval = 750;
-
-            let ticker = new Ticker(interval, maxLoops);
-
+            let deltaRatio = 0.25;
             let counter = [];
 
             let spy = sinon.spy(() => {
@@ -30,14 +28,16 @@ describe('Manager', () => {
                 }
             });
 
-            ticker.on('tick', spy);
-            ticker.on('done', () => {
+            let timer = new Timer(interval, maxLoops);
+
+            timer.on('tick', spy);
+            timer.on('done', () => {
                 try{
                     assert.deepEqual(spy.callCount, maxLoops, 'should be equal');
                     assert.deepEqual(counter.length, maxLoops, 'should be equal');
 
                     let expected = interval;
-                    let delta = interval * 0.1;
+                    let delta = interval * deltaRatio;
 
                     for(let i=1;i<counter.length;i++){
 
@@ -49,48 +49,45 @@ describe('Manager', () => {
 
                     }
 
-                    manager.dispose();
                     done();
                 }catch (e){
                     done(e);
                 }
             });
 
-            manager.start();
-            manager.add(ticker);
+            timer.start();
 
         }catch(e){
             done(e);
         }
     });
 
-    it('should register multiple times ticker', done => {
+    it('should open multiple time timer', done => {
         try {
 
-            let maxLoops = 5;
-            let interval = 200;
-
-            let ticker = new Ticker(interval, maxLoops);
-
+            let maxLoops = 10;
+            let interval = 150;
+            let deltaRatio = 0.25;
             let counter = [];
 
             let spy = sinon.spy(() => {
                 try{
-                    console.log(`tick: ${new Date().getTime()}`);
                     counter.push(new Date());
                 }catch(e){
                     done(e);
                 }
             });
 
-            ticker.on('tick', spy);
-            ticker.on('done', () => {
+            let timer = new Timer(interval, maxLoops);
+
+            timer.on('tick', spy);
+            timer.on('done', () => {
                 try{
                     assert.deepEqual(spy.callCount, maxLoops, 'should be equal');
                     assert.deepEqual(counter.length, maxLoops, 'should be equal');
 
                     let expected = interval;
-                    let delta = interval * 0.25;
+                    let delta = interval * deltaRatio;
 
                     for(let i=1;i<counter.length;i++){
 
@@ -102,48 +99,54 @@ describe('Manager', () => {
 
                     }
 
-                    manager.dispose();
                     done();
                 }catch (e){
                     done(e);
                 }
             });
 
-            manager.setInterval(15);
-            manager.start();
-            manager.add(ticker);
+            timer.start();
 
         }catch(e){
             done(e);
         }
     });
 
-    it('should register multiple tickers', () => {
+
+    it('should register multiple timers', () => {
         let maxLoops = 5;
         let interval = 500;
         let numTickers = 100;
 
-
-        setInterval = sinon.spy();
-        clearInterval = sinon.spy();
-        setTimeout = sinon.spy();
-
         let tickerIds = [];
 
-        manager.start();
-
         for(let i=0;i<numTickers;i++){
-            tickerIds.push(manager.add(new Ticker(interval, maxLoops)));
+            tickerIds.push(manager.add(new Timer(interval, maxLoops)));
         }
 
         manager.remove(tickerIds[tickerIds.length - 1]);
-        manager.remove(tickerIds[tickerIds.length - 2]);
+        manager.remove(tickerIds[tickerIds.length - 7]);
 
-        assert.deepEqual(setInterval.callCount, 1, 'should call once');
-        assert.deepEqual(clearInterval.callCount, 0, 'should call once');
-        assert.deepEqual(setTimeout.callCount, 0, 'should not call');
-        assert.deepEqual(manager._tickers.length, numTickers - 2, 'should be equal');
+        assert.deepEqual(manager._timers.length, numTickers - 2, 'should be equal');
+    });
 
-        manager.dispose();
+    it('should stop an infinite timer', done => {
+
+        try{
+            let timer = new Timer(1000);
+
+            timer.on('stopped', () => {
+                assert(true);
+                done();
+            });
+
+            timer.start();
+            setImmediate(() => {
+                timer.stop();
+            });
+        }catch(e){
+            done(e);
+        }
+
     });
 });

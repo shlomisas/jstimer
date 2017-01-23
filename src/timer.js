@@ -4,12 +4,15 @@
 
 import EventEmitter from 'events';
 
-export default class Ticker extends EventEmitter{
+import manager from './manager';
+
+export default class Timer extends EventEmitter{
 
     _interval;
     _localInterval;
     _times;
     _ticks;
+    _timerId;
 
     constructor(interval, times = -1) {
         super();
@@ -19,6 +22,10 @@ export default class Ticker extends EventEmitter{
 
         this._localInterval = 0;
         this._ticks = 0;
+    }
+
+    start(){
+        this._timerId = manager.add(this);
     }
 
     tick(portion){
@@ -36,8 +43,14 @@ export default class Ticker extends EventEmitter{
         return this._times !== -1 && this._ticks >= this._times;
     }
 
-    done(){
-        this.emit('done', this);
+    done(event = 'done'){
+        this.emit(event, this);
+    }
+
+    stop(){
+        if(this._timerId){
+            manager.remove(this._timerId, 'stopped');
+        }
     }
 
 }
