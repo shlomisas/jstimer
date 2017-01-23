@@ -1,1 +1,0 @@
-{"version":3,"sources":["ticker.js"],"names":["Ticker"],"mappings":";;;;;AAAA;;;;AAIe,MAAMA,MAAN,CAAY;kBAANA,M","file":"ticker.js","sourcesContent":["/**\r\n * Created by Shlomi\r\n */\r\n\r\nexport default class Ticker{}"]}
