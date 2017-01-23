@@ -73,9 +73,9 @@ timer.stop();
 
 ```
 
-[downloads-image]: https://img.shields.io/npm/dm/timger.svg
-[npm-url]: https://www.npmjs.com/package/timger
-[npm-image]: https://img.shields.io/npm/v/timger.svg
+[downloads-image]: https://img.shields.io/npm/dm/jstimer.svg
+[npm-url]: https://www.npmjs.com/package/jstimer
+[npm-image]: https://img.shields.io/npm/v/jstimer.svg
 
-[travis-url]: https://travis-ci.org/shlomisas/timger
-[travis-image]: https://img.shields.io/travis/shlomisas/timger/master.svg
+[travis-url]: https://travis-ci.org/shlomisas/jstimer
+[travis-image]: https://img.shields.io/travis/shlomisas/jstimer/master.svg
