@@ -1,0 +1,1 @@
+{"version":3,"sources":["manager.js"],"names":["Manager"],"mappings":";;;;;AAAA;;;;AAIe,MAAMA,OAAN,CAAa;kBAAPA,O","file":"manager.js","sourcesContent":["/**\r\n * Created by Shlomi\r\n */\r\n\r\nexport default class Manager{}"]}
