@@ -20,35 +20,43 @@ or
 
 ## Use
 
-### Start timers
+### Start one time timer (equal to `setTimeout`)
 
 ```javascript
 
 import {Timer} from 'jstimer';
 
-/* Infinite timer (aka: setInterval), will tick each minute - forever. */
+/* Will tick each 2 minutes, 4 times. */
 
-let timer1 = new Timer(1000);
+let timer = new Timer(2000, 4);
 
-timer1.on('tick', () => {
-    console.log('timer1 tick');
+timer.on('tick', () => {
+    console.log('timer tick');
 });
 
-timer1.start();
-
-/* Limited timer (aka: setTimeout), will tick each 2 minutes, 4 times. */
-
-let timer2 = new Timer(2000, 4);
-
-timer2.on('tick', () => {
-    console.log('timer2 tick');
+timer.on('done', () => {
+     console.log('timer done');
 });
 
-timer2.on('done', () => {
-     console.log('timer2 done');
+timer.start();
+
+```
+
+### Start infinite timer (equal to `setInterval`)
+
+```javascript
+
+import {Timer} from 'jstimer';
+
+/* TImer will tick each 1 minute, forever. */
+
+let timer = new Timer(1000);
+
+timer.on('tick', () => {
+    console.log('timer tick');
 });
 
-timer2.start();
+timer.start();
 
 ```
 
@@ -69,7 +77,10 @@ timer.on('stopped', () => {
 });
 
 timer.start();
-timer.stop();
+
+setImmediate(() => {
+    timer.stop();  
+});
 
 ```
 
