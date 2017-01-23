@@ -26,26 +26,26 @@ or
 
 import {Timer} from 'jstimer';
 
-/* Infinite timer (aka: setInterval), will tick forever.. */
+/* Infinite timer (aka: setInterval), will tick each minute - forever. */
 
 let timer1 = new Timer(1000);
 
 timer1.on('tick', () => {
-     console.log('timer 1 has ticked'); // This will print each minute, forever..
+    console.log('timer1 tick');
 });
 
 timer1.start();
 
-/* Limited timer (aka: setTimeout), will tick 4 times */
+/* Limited timer (aka: setTimeout), will tick each 2 minutes, 4 times. */
 
 let timer2 = new Timer(2000, 4);
 
 timer2.on('tick', () => {
-     console.log('timer 2 has ticked'); // This will print each 2 minutes 4 times..
+    console.log('timer2 tick');
 });
 
 timer2.on('done', () => {
-     console.log('timer 2 has ended'); // This will print when timer 2 will end - after 4 ticks
+     console.log('timer2 done');
 });
 
 timer2.start();
@@ -61,11 +61,11 @@ import {Timer} from 'jstimer';
 let timer = new Timer(1000);
 
 timer.on('tick', () => {
-     console.log('timer has ticked'); // This will print each minute, forever..
+    console.log('timer has ticked');
 });
 
 timer.on('stopped', () => {
-     console.log(`timer has stopped`); // The reason will be `stopped`
+    console.log(`timer has stopped`);
 });
 
 timer.start();
