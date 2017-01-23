@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "test": "mocha --compilers js:babel-core/register --timeout 15000 test/**/*.spec.js",
-    "preversion": "gulp build",
+    "preversion": "gulp build && git add . && git commit -q -m \"auto commit - build\"",
     "postversion": "git push"
   },
   "devDependencies": {
