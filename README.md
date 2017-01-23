@@ -26,7 +26,7 @@ or
 
 import {Timer} from 'jstimer';
 
-/* Will tick each 2 minutes, 4 times. */
+/* Will tick each 2 seconds, 4 times. */
 
 let timer = new Timer(2000, 4);
 
@@ -48,7 +48,7 @@ timer.start();
 
 import {Timer} from 'jstimer';
 
-/* TImer will tick each 1 minute, forever. */
+/* TImer will tick each 1 second, forever. */
 
 let timer = new Timer(1000);
 
