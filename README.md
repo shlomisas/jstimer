@@ -1,10 +1,10 @@
-# JS Timer - a JavaScript timer manager
+# An optimized JavaScript timer
 
 [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] 
 <!--[![Coveralls Status][coveralls-image]][coveralls-url] -->
 <!--[![OpenCollective Backers][backer-badge]][backer-url] [![OpenCollective Sponsors][sponsor-badge]][sponsor-url] -->
 
-JavaScript timer have in background just one native timer (setInterval)
+JavaScript timer that in the background have just one native timer (setInterval)
 
 ## Install 
 
