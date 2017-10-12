@@ -6,6 +6,8 @@
 
 JavaScript timer that in the background have just one native timer (setInterval)
 
+For now, it support NodeJS only.
+
 ## Install 
 
 `npm i jstimer -S`
